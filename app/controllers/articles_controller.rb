@@ -12,25 +12,25 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     if @article.save
-      render json: @article
+      render jsonapi: @article
     else
-      render json: @article.errors
+      render jsonapi_errors: @article.errors
     end
   end
 
   def update
     @article = Article.find(params[:id])
     if @article.update(article_params)
-      render json: @article
+      render jsonapi: @article
     else
-      render json: @article.errors
+      render jsonapi_errors: @article.errors
     end
   end
 
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
-    render json: { message: "Article #{@article.id} deleted" }
+    render status: :no_content
   end
 
   private
