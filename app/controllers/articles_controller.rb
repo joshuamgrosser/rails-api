@@ -1,12 +1,12 @@
 class ArticlesController < ApplicationController
   def index
     @articles = Article.all
-    render json: @articles
+    render json: @articles, include: :comments
   end
 
   def show
     @article = Article.find(params[:id])
-    render json: @article
+    render json: @article, include: :comments
   end
 
   def create
